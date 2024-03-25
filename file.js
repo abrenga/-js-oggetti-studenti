@@ -12,25 +12,14 @@ studenti.forEach(studente => {
     
 })*/
 
-
 const btnInp = document.getElementById("btnInp");
-const idCount = 0;
 const nome = document.getElementById("nome");
 const cognome = document.getElementById("cognome");
 const eta = document.getElementById("eta");
 
-btnInp.addEventListener("click", (e) => {
-    const studente = {
-        nome: nome.value,
-        cognome: cognome.value,
-        eta: eta.value
-    };
-    studenti.push(studente)
 
-});
-
+const alunniLista = document.getElementById("alunniLista");
 function creaRegistroUtenti(nome, cognome, eta) {
-    const alunniLista = document.getElementById("alunniLista");
     const div = document.createElement("div");
     div.classList.add("bg-light")
     alunniLista.appendChild(div);
@@ -39,11 +28,33 @@ function creaRegistroUtenti(nome, cognome, eta) {
 
 }
 
-const btnMostraAlunni = document.getElementById("btnaggiungi");
 
-btnMostraAlunni.addEventListener("click", (e) => {
-    studenti.forEach(studente => {
-        creaRegistroUtenti(studente.nome, studente.cognome, studente.eta);
-    });
+btnInp.addEventListener("click", (e) => {
+    let studentegiapresente = false;
+    for (let i = 0; i <= studenti.length; i++) {
+        if (studentegiapresente) {
+            break;
+        } else {
+            studenti.push({
+                nome: nome.value,
+                cognome: cognome.value,
+                eta: eta.value
+            });
+            studentegiapresente = true;
 
+        };
+
+        reset(alunniLista)
+        studenti.forEach(studente => {
+            creaRegistroUtenti(studente.nome, studente.cognome, studente.eta);
+
+        });
+    }
 });
+
+
+function reset(id) {
+    id.innerHTML = " ";
+}
+
+
