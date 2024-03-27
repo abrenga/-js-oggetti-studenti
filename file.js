@@ -20,12 +20,18 @@ const eta = document.getElementById("eta");
 
 const alunniLista = document.getElementById("alunniLista");
 function creaRegistroUtenti(nome, cognome, eta) {
-    const div = document.createElement("div");
-    div.classList.add("bg-light")
-    alunniLista.appendChild(div);
-    div.textContent = ` Nome: ${nome} cognome: ${cognome} eta: ${eta}`
-    return div;
-
+    const tr = document.createElement("tr");
+    tr.classList.add("bg-light")
+    alunniLista.appendChild(tr);
+    const tdNome = document.createElement("td");
+    tr.appendChild(tdNome);
+    const tdCognome = document.createElement("td");
+    tr.appendChild(tdCognome)
+    const tdEta = document.createElement("td");
+    tr.appendChild(tdEta)
+    tdNome.innerHTML += nome;
+    tdCognome.innerHTML += cognome;
+    tdEta.innerHTML += eta;
 }
 
 
@@ -39,7 +45,10 @@ btnInp.addEventListener("click", (e) => {
     let ePresente = studentePresente(studente);
     if (ePresente) {
         alert("alunno gia presente");
-    } else {
+    } else if (nome.value == "" || cognome.value == "" || eta.value == "") {
+        alert("non hai inserito i dati");
+    }
+    else {
         studenti.push(studente);
         reset(alunniLista)
         studenti.forEach(studente => {
@@ -66,3 +75,7 @@ function studentePresente(studente) {
     } return false;
 
 }
+
+
+const btnFiltraNome = document.getElementById("btnFiltraNome");
+btnFiltraNome.
