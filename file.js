@@ -1,4 +1,21 @@
-const studenti = [];
+const studenti = [{
+    nome: "Marco",
+    cognome: "Rossi",
+    eta: 12
+},
+{
+    nome: "Maria",
+    cognome: "Bianchi",
+    eta: 14
+},
+{
+    nome: "Alessandra",
+    cognome: "Franchi",
+    eta: 18
+},
+
+
+];
 
 
 /*Versione con il for
@@ -50,15 +67,25 @@ btnInp.addEventListener("click", (e) => {
     }
     else {
         studenti.push(studente);
-        reset(alunniLista)
-        studenti.forEach(studente => {
-            creaRegistroUtenti(studente.nome, studente.cognome, studente.eta);
+        reset(alunniLista);
+        inserisciStudente(studenti);
 
-        });
     }
 
 
 });
+
+
+function inserisciStudente(arrayStudenti) {
+
+    for (let i = 0; i < arrayStudenti.length; i++) {
+        const studente = arrayStudenti[i];
+        creaRegistroUtenti(studente.nome, studente.cognome, studente.eta);
+    }
+
+
+
+}
 
 
 function reset(id) {
@@ -77,5 +104,48 @@ function studentePresente(studente) {
 }
 
 
-const btnFiltraNome = document.getElementById("btnFiltraNome");
-btnFiltraNome.
+inserisciStudente(studenti);
+
+const arrayMaggiorenni = [];
+const btnMaggiorenni = document.getElementById("btnMaggiorenni");
+
+
+btnMaggiorenni.addEventListener("click", (e) => {
+    reset(alunniLista);
+    studenti.forEach(studente => {
+        if (studente.eta >= 18) {
+            arrayMaggiorenni.push(studente);
+            inserisciStudente(arrayMaggiorenni)
+        }
+
+       
+    })
+});
+
+const btnMinorenni = document.getElementById("btnMinorenni");
+const arrayMinorenni = [];
+
+
+
+btnMinorenni.addEventListener("click", (e) => {
+    reset(alunniLista);
+    studenti.forEach(studente => {
+        if (studente.eta < 18) {
+            arrayMinorenni.push(studente);
+            inserisciStudente(arrayMinorenni);
+        }
+
+
+        
+    })
+});
+
+
+
+
+const btnTutti = document.getElementById("btnTutti");
+btnTutti.addEventListener("click", (e) => {
+    reset(alunniLista);
+    inserisciStudente(studenti);
+
+});
