@@ -46,9 +46,9 @@ function creaRegistroUtenti(nome, cognome, eta) {
     tr.appendChild(tdCognome)
     const tdEta = document.createElement("td");
     tr.appendChild(tdEta)
-    tdNome.innerHTML += nome;
-    tdCognome.innerHTML += cognome;
-    tdEta.innerHTML += eta;
+    tdNome.innerHTML = nome;
+    tdCognome.innerHTML = cognome;
+    tdEta.innerHTML = eta;
 }
 
 
@@ -106,39 +106,50 @@ function studentePresente(studente) {
 
 inserisciStudente(studenti);
 
-const arrayMaggiorenni = [];
+
 const btnMaggiorenni = document.getElementById("btnMaggiorenni");
+
+function eMaggiorenne(array) {
+    const arrayMaggiorenni = [];
+    array.forEach(studente => {
+        if (studente.eta >= 18) {
+            arrayMaggiorenni.push(studente);
+
+        }
+
+    })
+    return arrayMaggiorenni
+};
+
+
 
 
 btnMaggiorenni.addEventListener("click", (e) => {
     reset(alunniLista);
-    studenti.forEach(studente => {
-        if (studente.eta >= 18) {
-            arrayMaggiorenni.push(studente);
-            inserisciStudente(arrayMaggiorenni)
-        }
+    const arrayMax = eMaggiorenne(studenti)
+    inserisciStudente(arrayMax)
 
-       
-    })
 });
 
 const btnMinorenni = document.getElementById("btnMinorenni");
-const arrayMinorenni = [];
 
 
+function eMinorenne(array) {
+    const arrayMinorenni = [];
+    array.forEach(studente => {
+        if (studente.eta < 18) {
+            arrayMinorenni.push(studente);
+        }
+    });
+    return arrayMinorenni;
+}
 
 btnMinorenni.addEventListener("click", (e) => {
     reset(alunniLista);
-    studenti.forEach(studente => {
-        if (studente.eta < 18) {
-            arrayMinorenni.push(studente);
-            inserisciStudente(arrayMinorenni);
-        }
+    const arrayMin = eMinorenne(studenti)
+    inserisciStudente(arrayMin)
 
-
-        
-    })
-});
+})
 
 
 
